@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Khang Nguyễn Đinh Minh</title>
+  <meta name="description" content="Portfolio of Nguyễn Đinh Minh Khang">
+  <meta name="keywords" content="Portfolio, Developer, Freelancer, IT">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@300;400;600;700&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Inline styles for Portfolio section -->
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      overflow-x: hidden;
+    }
+
+    /* Section Title Styles */
+    .section-title {
+      text-align: center;
+      padding-bottom: 40px;
+      margin-top: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: #6c757d;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Portfolio Filter Styles */
+    .portfolio-filters {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .portfolio-filters li {
+      display: inline-block;
+      margin: 5px 10px;
+      cursor: pointer;
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      background: #fff;
+      border: 1px solid #1a73e8;
+      border-radius: 25px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .portfolio-filters li:hover,
+    .portfolio-filters li.filter-active {
+      background: #1a73e8;
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(26, 115, 232, 0.3);
+    }
+
+    /* Flip Card Styles */
+    .flip-card {
+      background-color: transparent;
+      width: 100%;
+      aspect-ratio: 4 / 3; /* Tỷ lệ khung hình */
+      perspective: 1000px;
+      margin-bottom: 20px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .flip-card-front {
+      background-color: #fff;
+    }
+
+    .flip-card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Giữ nguyên tỷ lệ hình ảnh */
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .flip-card-front::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .flip-card:hover .flip-card-front::after {
+      opacity: 1;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, #1a73e8, #6610f2);
+      color: white;
+      transform: rotateY(180deg);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .flip-card-back h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.2;
+      max-width: 90%;
+      word-wrap: break-word;
+    }
+
+    .flip-card-back p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+      max-width: 85%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .flip-card-back .links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .flip-card-back a {
+      color: #fff;
+      font-size: 1.3rem;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .flip-card-back a:hover {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+
+    /* Portfolio Item Styles */
+    .portfolio-item {
+      transition: all 0.3s ease-in-out;
+    }
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Mobile Optimization */
+    @media (max-width: 768px) {
+      .section-title h2 {
+        font-size: 2rem;
+      }
+
+      .section-title p {
+        font-size: 1rem;
+      }
+
+      .portfolio-filters li {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+      }
+
+      .flip-card {
+        aspect-ratio: 4 / 3; /* Giữ tỷ lệ khung hình */
+      }
+
+      .flip-card-back {
+        padding: 15px;
+      }
+
+      .flip-card-back h4 {
+        font-size: 1.2rem;
+        max-width: 95%;
+      }
+
+      .flip-card-back p {
+        font-size: 0.8rem;
+        max-width: 90%;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+
+      .flip-card-back a {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .flip-card {
+        aspect-ratio: 4 / 3; /* Giữ tỷ lệ khung hình */
+      }
+
+      .flip-card-back {
+        padding: 10px;
+      }
+
+      .flip-card-back h4 {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+
+      .flip-card-back p {
+        font-size: 0.75rem;
+        max-width: 95%;
+        -webkit-line-clamp: 2;
+      }
+
+      .flip-card-back a {
+        font-size: 1rem;
+      }
+
+      .portfolio-filters li {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        margin: 3px 5px;
+      }
+    }
+  </style>
+</head>
+
+<body class="index-page">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">Khang's Profile</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="chungchi.html">Certificate</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <main class="main">
+    <section id="hero" class="hero section dark-background text-center">
+      <img src="assets/img/avarta.png" alt="Khang Avatar" data-aos="fade-in">
+      <div class="container mt-2" data-aos="fade-up" data-aos-delay="100">
+        <p><span class="typed" data-typed-items="Thành tích và chứng nhận nổi bật"></span></p>
+      </div>
+    </section>
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio section pt-0">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+               <p>Thành tựu và chứng nhận nổi bật của tôi</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+          <!-- Portfolio Filters -->
+          <ul class="portfolio-filters isotope-filters">
+            <!-- <li data-filter="*" class="filter-active">Tất cả</li> -->
+            <!-- <li data-filter=".filter-scholarship">Học Bổng</li>
+            <li data-filter=".filter-certificate">Chứng chỉ</li>
+            <li data-filter=".filter-award">Giấy Khen</li> -->
+          </ul>
+          <!-- End Portfolio Filters -->
+
+          <!-- Portfolio Container -->
+          <div class="row gy-4 isotope-container">
+            <!-- Portfolio Item 1 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scholarship" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (1).jpg" class="img-fluid" alt="Học Bổng 1">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Học Bổng 1</h4>
+                    <p>Học bổng xuất sắc dành cho sinh viên CNTT.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (1).jpg" title="Học Bổng 1" data-gallery="portfolio-gallery-scholarship" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-certificate" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (2).jpg" class="img-fluid" alt="Chứng chỉ 1">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Chứng chỉ 1</h4>
+                    <p>Chứng chỉ lập trình Python chuyên sâu.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (2).jpg" title="Chứng chỉ 1" data-gallery="portfolio-gallery-certificate" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 3 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-award" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (3).jpg" class="img-fluid" alt="Giấy Khen 1">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Giấy Khen 1</h4>
+                    <p>Thành tích nổi bật trong cuộc thi lập trình.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (3).jpg" title="Giấy Khen 1" data-gallery="portfolio-gallery-award" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 4 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scholarship" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (4).jpg" class="img-fluid" alt="Học Bổng 2">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Học Bổng 2</h4>
+                    <p>Thành tựu nổi bật trong học tập và nghiên cứu.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (4).jpg" title="Học Bổng 2" data-gallery="portfolio-gallery-scholarship" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 5 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-certificate" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (5).jpg" class="img-fluid" alt="Chứng chỉ 2">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Chứng chỉ 2</h4>
+                    <p>Hoàn thành khóa học chuyên sâu về lập trình.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (5).jpg" title="Chứng chỉ 2" data-gallery="portfolio-gallery-certificate" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 6 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-award" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (6).jpg" class="img-fluid" alt="Giấy Khen 2">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Giấy Khen 2</h4>
+                    <p>Được trao tặng vì đóng góp xuất sắc trong dự án.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (6).jpg" title="Giấy Khen 2" data-gallery="portfolio-gallery-award" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 7 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scholarship" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (7).jpg" class="img-fluid" alt="Học Bổng 3">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Học Bổng 3</h4>
+                    <p>Học bổng dành cho sinh viên xuất sắc.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (7).jpg" title="Học Bổng 3" data-gallery="portfolio-gallery-scholarship" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 8 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-certificate" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (8).jpg" class="img-fluid" alt="Chứng chỉ 3">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Chứng chỉ 3</h4>
+                    <p>Chứng nhận hoàn thành khóa học thiết kế web.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (8).jpg" title="Chứng chỉ 3" data-gallery="portfolio-gallery-certificate" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 9 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-award" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (9).jpg" class="img-fluid" alt="Giấy Khen 3">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Giấy Khen 3</h4>
+                    <p>Thành tích nổi bật trong hoạt động ngoại khóa.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (9).jpg" title="Giấy Khen 3" data-gallery="portfolio-gallery-award" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 10 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scholarship" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (10).jpg" class="img-fluid" alt="Học Bổng 4">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Học Bổng 4</h4>
+                    <p>Học bổng quốc tế cho sinh viên xuất sắc.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (10).jpg" title="Học Bổng 4" data-gallery="portfolio-gallery-scholarship" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 11 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-certificate" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (11).jpg" class="img-fluid" alt="Chứng chỉ 4">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Chứng chỉ 4</h4>
+                    <p>Chứng nhận kỹ năng lập trình nâng cao.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (11).jpg" title="Chứng chỉ 4" data-gallery="portfolio-gallery-certificate" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 12 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-award" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (12).jpg" class="img-fluid" alt="Giấy Khen 4">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Giấy Khen 4</h4>
+                    <p>Thành tích trong cuộc thi công nghệ.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (12).jpg" title="Giấy Khen 4" data-gallery="portfolio-gallery-award" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 13 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-scholarship" data-aos="fade-up" data-aos-delay="100">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (13).jpg" class="img-fluid" alt="Học Bổng 5">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Học Bổng 5</h4>
+                    <p>Học bổng dành cho sinh viên có đóng góp cộng đồng.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (13).jpg" title="Học Bổng 5" data-gallery="portfolio-gallery-scholarship" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 14 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-certificate" data-aos="fade-up" data-aos-delay="200">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (14).jpg" class="img-fluid" alt="Chứng chỉ 5">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Chứng chỉ 5</h4>
+                    <p>Chứng nhận về quản lý dự án công nghệ.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (14).jpg" title="Chứng chỉ 5" data-gallery="portfolio-gallery-certificate" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Item 15 -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-award" data-aos="fade-up" data-aos-delay="300">
+              <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <img src="assets/img/cr/cr (15).jpg" class="img-fluid" alt="Giấy Khen 5">
+                  </div>
+                  <div class="flip-card-back">
+                    <h4>Giấy Khen 5</h4>
+                    <p>Được trao tặng vì sáng tạo trong dự án công nghệ.</p>
+                    <div class="links">
+                      <a href="assets/img/cr/cr (15).jpg" title="Giấy Khen 5" data-gallery="portfolio-gallery-award" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Portfolio Container -->
+        </div>
+      </div>
+    </section>
+    <!-- End Portfolio Section -->
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer accent-background">
+    <div class="container text-center">
+      <p>Những <strong class="sitename">Mạng Xã Hội</strong> của <span>Minh Khang</span></p>
+      <div class="social-links d-flex justify-content-center gap-3 mt-3">
+        <a href="https://zalo.me/0327956191" target="_blank"><img src="assets/img/zalo.png" alt="Zalo" style="height:24px;width:24px;"></a>
+        <a href="https://www.facebook.com/nguyen.inh.minh.khang.383481/?locale=vi_VN" target="_blank"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.linkedin.com/in/ndmkhang04525082003" target="_blank"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits mt-3">Designed by <a href="#">Minh Khang</a></div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Portfolio Initialization Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize Isotope
+      var iso = new Isotope('.isotope-container', {
+        itemSelector: '.portfolio-item',
+        layoutMode: 'masonry'
+      });
+
+      // Filter items on click
+      var filters = document.querySelectorAll('.portfolio-filters li');
+      filters.forEach(function (filter) {
+        filter.addEventListener('click', function () {
+          filters.forEach(function (f) { f.classList.remove('filter-active'); });
+          this.classList.add('filter-active');
+          iso.arrange({ filter: this.getAttribute('data-filter') });
+        });
+      });
+
+      // Initialize GLightbox
+      const lightbox = GLightbox({ selector: '.glightbox' });
+
+      // AOS animation
+      AOS.init({ once: true, duration: 800 });
+    });
+  </script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
